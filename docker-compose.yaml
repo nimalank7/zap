@@ -1,0 +1,24 @@
+services:
+  zap:
+    container_name: zap
+    image: zaproxy/zap-stable
+    ports:
+      - "8080:8080"
+    command:
+      - zap.sh
+      - -daemon
+      - -host
+      - 0.0.0.0
+      - -port
+      - '8080'
+      - -config
+      - 'api.addrs.addr.name=.*'
+      - -config
+      - 'api.addrs.addr.regex=true'
+      - -config
+      - 'api.disablekey=true'
+  juice-shop:
+    container_name: juice-shop
+    image: bkimminich/juice-shop:latest
+    ports:
+      - "3000:3000"
